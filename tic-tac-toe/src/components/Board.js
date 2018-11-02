@@ -1,13 +1,45 @@
 import React, { Component } from 'react';
+
+import { calculateWinner } from '../supports/helper';
+
 import Square from './Square';
 
 class Board extends Component {
+	constructor() {
+		super();
+		this.state = {
+			squares: Array(9).fill(null),
+			xIsNext: true
+		};
+	}
+
+	handleClick(i) {
+		// console.log(i);
+		const squares = [...this.state.squares];
+		if (calculateWinner(squares) || squares[i]) {
+			return;
+		}
+		squares[i] = this.state.xIsNext ? 'X' : 'O';
+		this.setState({
+			// squares: [...newSquares.slice(0, i), 'X', ...newSquares.slice(i + 1)]
+			squares: squares,
+			xIsNext: !this.state.xIsNext
+		});
+	}
+
 	renderSquare(i) {
-		return <Square />;
+		return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />;
 	}
 
 	render() {
-		const status = 'Next player: X';
+		// const status = 'Next player: X';
+		const winner = calculateWinner(this.state.squares);
+		let status;
+		if (winner) {
+			status = `Winner: ${winner}`;
+		} else {
+			status = `Next Player: ${this.state.xIsNext ? 'X' : 'O'}`;
+		}
 
 		return (
 			<div>
