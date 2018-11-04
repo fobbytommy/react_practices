@@ -69,6 +69,8 @@ class Game extends Component {
 		let status;
 		if (winner) {
 			status = `Winner: ${winner}`;
+		} else if (this.state.stepNumber === 9) {
+			status = `THIS IS A DRAW!`;
 		} else {
 			status = `Next Player: ${this.state.xIsNext ? 'X' : 'O'}`;
 		}
