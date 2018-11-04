@@ -8,7 +8,8 @@ class Game extends Component {
 		this.state = {
 			history: [
 				{
-					squares: Array(9).fill(null)
+					squares: Array(9).fill(null),
+					position: null
 				}
 			],
 			stepNumber: 0,
@@ -30,7 +31,8 @@ class Game extends Component {
 			// squares: squares,
 			history: history.concat([
 				{
-					squares: squares
+					squares: squares,
+					position: i
 				}
 			]),
 			stepNumber: history.length,
@@ -53,9 +55,13 @@ class Game extends Component {
 
 		const moves = history.map((step, move) => {
 			const desc = move ? 'Go to move #' + move : 'Go to game start';
+			const pos = step.position;
+			const col = Math.floor(pos / 3) + 1;
+			const row = (pos % 3) + 1;
 			return (
 				<li key={move}>
 					<button onClick={() => this.jumpTo(move)}>{desc}</button>
+					{pos !== null ? ` (${col}, ${row})` : ` (col, row)`}
 				</li>
 			);
 		});
