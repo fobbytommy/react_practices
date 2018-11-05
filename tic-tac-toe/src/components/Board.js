@@ -4,7 +4,15 @@ import Square from './Square';
 
 class Board extends Component {
 	renderSquare(i) {
-		return <Square key={i} value={this.props.squares[i]} onClick={() => this.props.onClick(i)} />;
+		return (
+			<Square
+				key={i}
+				index={i}
+				currentPosition={i === this.props.currentPos}
+				value={this.props.squares[i]}
+				onClick={() => this.props.onClick(i)}
+			/>
+		);
 	}
 
 	renderBoard(rowNum) {
