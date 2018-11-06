@@ -4,10 +4,17 @@ import Square from './Square';
 
 class Board extends Component {
 	renderSquare(i) {
+		let winningLine = false;
+		if (this.props.winningLine != null) {
+			winningLine = this.props.winningLine.includes(i);
+			// console.log([i, winningLine]);
+		}
+
 		return (
 			<Square
 				key={i}
 				index={i}
+				winningBlock={winningLine}
 				currentPosition={i === this.props.currentPos}
 				value={this.props.squares[i]}
 				onClick={() => this.props.onClick(i)}

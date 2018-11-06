@@ -53,3 +53,7 @@ ul {
 .current {
 	color: red;
 }
+
+.winningLine {
+	background-color: yellow;
+}

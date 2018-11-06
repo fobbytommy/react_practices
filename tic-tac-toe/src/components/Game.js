@@ -13,7 +13,8 @@ class Game extends Component {
 				}
 			],
 			stepNumber: 0,
-			xIsNext: true
+			xIsNext: true,
+			winningLine: null
 		};
 	}
 
@@ -22,7 +23,7 @@ class Game extends Component {
 		const history = this.state.history.slice(0, this.state.stepNumber + 1);
 		const current = history[history.length - 1];
 		const squares = [...current.squares];
-		if (calculateWinner(squares) || squares[i]) {
+		if (calculateWinner(squares).player || squares[i]) {
 			return;
 		}
 		squares[i] = this.state.xIsNext ? 'X' : 'O';
@@ -67,8 +68,8 @@ class Game extends Component {
 		});
 
 		let status;
-		if (winner) {
-			status = `Winner: ${winner}`;
+		if (winner.player) {
+			status = `Winner: ${winner.player}`;
 		} else if (this.state.stepNumber === 9) {
 			status = `THIS IS A DRAW!`;
 		} else {
@@ -78,7 +79,12 @@ class Game extends Component {
 		return (
 			<div className="game">
 				<div className="game-board">
-					<Board squares={current.squares} currentPos={current.position} onClick={i => this.handleClick(i)} />
+					<Board
+						winningLine={winner.line}
+						squares={current.squares}
+						currentPos={current.position}
+						onClick={i => this.handleClick(i)}
+					/>
 				</div>
 				<div className="game-info">
 					<div>{status}</div>

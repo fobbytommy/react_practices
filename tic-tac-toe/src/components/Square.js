@@ -10,7 +10,7 @@ import styled from 'styled-components';
 const Square = props => {
 	// console.log(props.currentPosition ? 'red' : 'black');
 	return (
-		<button className="square" onClick={props.onClick}>
+		<button className={`square${props.winningBlock ? ' winningLine' : ''}`} onClick={props.onClick}>
 			<span className={props.currentPosition ? 'current' : ''}>{props.value}</span>
 		</button>
 	);
