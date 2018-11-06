@@ -1,14 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
-	color: ${props => (props.currentPosition ? 'red' : 'black')};
-`;
+// const StyledButton = styled.button`
+// 	> span {
+// 		color: ${props => (props.currentPosition ? 'red' : 'black')};
+// 	}
+// `;
 
 const Square = props => {
+	// console.log(props.currentPosition ? 'red' : 'black');
 	return (
-		<button className="square" onClick={props.onClick} style={`color: ${props.currentPosition ? 'red' : 'black'}`}>
-			{props.value}
+		<button className="square" onClick={props.onClick}>
+			<span className={props.currentPosition ? 'current' : ''}>{props.value}</span>
 		</button>
 	);
 };
